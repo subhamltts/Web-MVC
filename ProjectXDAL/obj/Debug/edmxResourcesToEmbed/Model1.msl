@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ProjectXModelStoreContainer" CdmEntityContainer="ProjectXDBStr">
+    <EntitySetMapping Name="Batches">
+      <EntityTypeMapping TypeName="ProjectXModel.Batch">
+        <MappingFragment StoreEntitySet="Batch">
+          <ScalarProperty Name="BatchID" ColumnName="BatchID" />
+          <ScalarProperty Name="BatchName" ColumnName="BatchName" />
+          <ScalarProperty Name="BatchStrength" ColumnName="BatchStrength" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Courses">
+      <EntityTypeMapping TypeName="ProjectXModel.Cours">
+        <MappingFragment StoreEntitySet="Courses">
+          <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+          <ScalarProperty Name="CourseTitle" ColumnName="CourseTitle" />
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="AssessmentMode" ColumnName="AssessmentMode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Faculties">
+      <EntityTypeMapping TypeName="ProjectXModel.Faculty">
+        <MappingFragment StoreEntitySet="Faculty">
+          <ScalarProperty Name="FacultyName" ColumnName="FacultyName" />
+          <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+          <ScalarProperty Name="PSNo" ColumnName="PSNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Models">
+      <EntityTypeMapping TypeName="ProjectXModel.Model">
+        <MappingFragment StoreEntitySet="Model">
+          <ScalarProperty Name="ModelID" ColumnName="ModelID" />
+          <ScalarProperty Name="ModelName" ColumnName="ModelName" />
+          <ScalarProperty Name="ModelOwner" ColumnName="ModelOwner" />
+          <ScalarProperty Name="ModelDate" ColumnName="ModelDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Participants">
+      <EntityTypeMapping TypeName="ProjectXModel.Participant">
+        <MappingFragment StoreEntitySet="Participants">
+          <ScalarProperty Name="ParticipantID" ColumnName="ParticipantID" />
+          <ScalarProperty Name="ParticipantName" ColumnName="ParticipantName" />
+          <ScalarProperty Name="ParticipantEmailID" ColumnName="ParticipantEmailID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="ProjectXModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Graders">
+      <EntityTypeMapping TypeName="ProjectXModel.Grader">
+        <MappingFragment StoreEntitySet="Grader">
+          <ScalarProperty Name="Marks_Obtained" ColumnName="Marks_Obtained" />
+          <ScalarProperty Name="Feedback" ColumnName="Feedback" />
+          <ScalarProperty Name="BatchID" ColumnName="BatchID" />
+          <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+          <ScalarProperty Name="ParticipantID" ColumnName="ParticipantID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Batch_FacultyMapping" TypeName="ProjectXModel.Batch_FacultyMapping" StoreEntitySet="Batch_FacultyMapping">
+      <EndProperty Name="Batch">
+        <ScalarProperty Name="BatchID" ColumnName="BatchID" />
+      </EndProperty>
+      <EndProperty Name="Faculty">
+        <ScalarProperty Name="PSNo" ColumnName="PSNo" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="Batch_ModelMapping" TypeName="ProjectXModel.Batch_ModelMapping" StoreEntitySet="Batch_ModelMapping">
+      <EndProperty Name="Batch">
+        <ScalarProperty Name="BatchID" ColumnName="BatchID" />
+      </EndProperty>
+      <EndProperty Name="Model">
+        <ScalarProperty Name="ModelID" ColumnName="ModelID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="Course_BatchMapping" TypeName="ProjectXModel.Course_BatchMapping" StoreEntitySet="Course_BatchMapping">
+      <EndProperty Name="Batch">
+        <ScalarProperty Name="BatchID" ColumnName="BatchID" />
+      </EndProperty>
+      <EndProperty Name="Courses">
+        <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="Course_FacultyMapping" TypeName="ProjectXModel.Course_FacultyMapping" StoreEntitySet="Course_FacultyMapping">
+      <EndProperty Name="Courses">
+        <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+      </EndProperty>
+      <EndProperty Name="Faculty">
+        <ScalarProperty Name="PSNo" ColumnName="PSNo" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="Course_ModelMapping" TypeName="ProjectXModel.Course_ModelMapping" StoreEntitySet="Course_ModelMapping">
+      <EndProperty Name="Courses">
+        <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+      </EndProperty>
+      <EndProperty Name="Model">
+        <ScalarProperty Name="ModelID" ColumnName="ModelID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="Participant_BatchMapping" TypeName="ProjectXModel.Participant_BatchMapping" StoreEntitySet="Participant_BatchMapping">
+      <EndProperty Name="Batch">
+        <ScalarProperty Name="BatchID" ColumnName="BatchID" />
+      </EndProperty>
+      <EndProperty Name="Participants">
+        <ScalarProperty Name="ParticipantID" ColumnName="ParticipantID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="ProjectXModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="ProjectXModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="ProjectXModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="ProjectXModel.Store.sp_helpdiagramdefinition" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="ProjectXModel.Store.sp_helpdiagrams" />
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="ProjectXModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="ProjectXModel.Store.sp_upgraddiagrams" />
+    <FunctionImportMapping FunctionImportName="uspInsertBatch" FunctionName="ProjectXModel.Store.uspInsertBatch" />
+    <FunctionImportMapping FunctionImportName="uspInsertBatchFacultyMapping" FunctionName="ProjectXModel.Store.uspInsertBatchFacultyMapping" />
+    <FunctionImportMapping FunctionImportName="uspInsertBatchModelMapping" FunctionName="ProjectXModel.Store.uspInsertBatchModelMapping" />
+    <FunctionImportMapping FunctionImportName="uspInsertCourse_BatchMapping" FunctionName="ProjectXModel.Store.uspInsertCourse_BatchMapping" />
+    <FunctionImportMapping FunctionImportName="uspInsertCourseDetails" FunctionName="ProjectXModel.Store.uspInsertCourseDetails" />
+    <FunctionImportMapping FunctionImportName="uspInsertFacultyDetails" FunctionName="ProjectXModel.Store.uspInsertFacultyDetails" />
+    <FunctionImportMapping FunctionImportName="uspInsertGrader" FunctionName="ProjectXModel.Store.uspInsertGrader" />
+    <FunctionImportMapping FunctionImportName="uspInsertModelDetails" FunctionName="ProjectXModel.Store.uspInsertModelDetails" />
+    <FunctionImportMapping FunctionImportName="uspInsertParticipants" FunctionName="ProjectXModel.Store.uspInsertParticipants" />
+    <FunctionImportMapping FunctionImportName="uspInsertParticitpantBatchMapping" FunctionName="ProjectXModel.Store.uspInsertParticitpantBatchMapping" />
+    <FunctionImportMapping FunctionImportName="uspModifyAssessmentMode" FunctionName="ProjectXModel.Store.uspModifyAssessmentMode" />
+    <FunctionImportMapping FunctionImportName="uspModifyCourseDuration" FunctionName="ProjectXModel.Store.uspModifyCourseDuration" />
+    <FunctionImportMapping FunctionImportName="uspModifyCourseOwner" FunctionName="ProjectXModel.Store.uspModifyCourseOwner" />
+    <FunctionImportMapping FunctionImportName="uspModifyGrader" FunctionName="ProjectXModel.Store.uspModifyGrader" />
+    <FunctionImportMapping FunctionImportName="uspSelecBatch" FunctionName="ProjectXModel.Store.uspSelecBatch" />
+    <FunctionImportMapping FunctionImportName="uspSelectBatch" FunctionName="ProjectXModel.Store.uspSelectBatch" />
+  </EntityContainerMapping>
+</Mapping>

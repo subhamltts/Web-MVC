@@ -1,0 +1,295 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProjectXModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Batch">
+    <Key>
+      <PropertyRef Name="BatchID" />
+    </Key>
+    <Property Name="BatchID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="BatchName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="BatchStrength" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Graders" Relationship="Self.FK__Grader__BatchID__681373AD" FromRole="Batch" ToRole="Grader" />
+    <NavigationProperty Name="Faculties" Relationship="Self.Batch_FacultyMapping" FromRole="Batch" ToRole="Faculty" />
+    <NavigationProperty Name="Models" Relationship="Self.Batch_ModelMapping" FromRole="Batch" ToRole="Model" />
+    <NavigationProperty Name="Courses" Relationship="Self.Course_BatchMapping" FromRole="Batch" ToRole="Courses" />
+    <NavigationProperty Name="Participants" Relationship="Self.Participant_BatchMapping" FromRole="Batch" ToRole="Participants" />
+  </EntityType>
+  <EntityType Name="Cours">
+    <Key>
+      <PropertyRef Name="CourseID" />
+    </Key>
+    <Property Name="CourseID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CourseTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Duration" Type="Int32" Nullable="false" />
+    <Property Name="Owner" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AssessmentMode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Graders" Relationship="Self.FK__Grader__CourseID__690797E6" FromRole="Courses" ToRole="Grader" />
+    <NavigationProperty Name="Batches" Relationship="Self.Course_BatchMapping" FromRole="Courses" ToRole="Batch" />
+    <NavigationProperty Name="Faculties" Relationship="Self.Course_FacultyMapping" FromRole="Courses" ToRole="Faculty" />
+    <NavigationProperty Name="Models" Relationship="Self.Course_ModelMapping" FromRole="Courses" ToRole="Model" />
+  </EntityType>
+  <EntityType Name="Faculty">
+    <Key>
+      <PropertyRef Name="PSNo" />
+    </Key>
+    <Property Name="FacultyName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="EmailID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PSNo" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Batches" Relationship="Self.Batch_FacultyMapping" FromRole="Faculty" ToRole="Batch" />
+    <NavigationProperty Name="Courses" Relationship="Self.Course_FacultyMapping" FromRole="Faculty" ToRole="Courses" />
+  </EntityType>
+  <EntityType Name="Model">
+    <Key>
+      <PropertyRef Name="ModelID" />
+    </Key>
+    <Property Name="ModelID" Type="Int32" Nullable="false" />
+    <Property Name="ModelName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ModelOwner" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ModelDate" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Batches" Relationship="Self.Batch_ModelMapping" FromRole="Model" ToRole="Batch" />
+    <NavigationProperty Name="Courses" Relationship="Self.Course_ModelMapping" FromRole="Model" ToRole="Courses" />
+  </EntityType>
+  <EntityType Name="Participant">
+    <Key>
+      <PropertyRef Name="ParticipantID" />
+    </Key>
+    <Property Name="ParticipantID" Type="Int32" Nullable="false" />
+    <Property Name="ParticipantName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ParticipantEmailID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Graders" Relationship="Self.FK__Grader__Particip__69FBBC1F" FromRole="Participants" ToRole="Grader" />
+    <NavigationProperty Name="Batches" Relationship="Self.Participant_BatchMapping" FromRole="Participants" ToRole="Batch" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Grader">
+    <Key>
+      <PropertyRef Name="Marks_Obtained" />
+      <PropertyRef Name="BatchID" />
+      <PropertyRef Name="CourseID" />
+      <PropertyRef Name="ParticipantID" />
+    </Key>
+    <Property Name="Marks_Obtained" Type="Int32" Nullable="false" />
+    <Property Name="Feedback" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="BatchID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CourseID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ParticipantID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Batch" Relationship="Self.FK__Grader__BatchID__681373AD" FromRole="Grader" ToRole="Batch" />
+    <NavigationProperty Name="Cours" Relationship="Self.FK__Grader__CourseID__690797E6" FromRole="Grader" ToRole="Courses" />
+    <NavigationProperty Name="Participant" Relationship="Self.FK__Grader__Particip__69FBBC1F" FromRole="Grader" ToRole="Participants" />
+  </EntityType>
+  <Association Name="FK__Grader__BatchID__681373AD">
+    <End Role="Batch" Type="Self.Batch" Multiplicity="1" />
+    <End Role="Grader" Type="Self.Grader" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Batch">
+        <PropertyRef Name="BatchID" />
+      </Principal>
+      <Dependent Role="Grader">
+        <PropertyRef Name="BatchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Grader__CourseID__690797E6">
+    <End Role="Courses" Type="Self.Cours" Multiplicity="1" />
+    <End Role="Grader" Type="Self.Grader" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Courses">
+        <PropertyRef Name="CourseID" />
+      </Principal>
+      <Dependent Role="Grader">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Grader__Particip__69FBBC1F">
+    <End Role="Participants" Type="Self.Participant" Multiplicity="1" />
+    <End Role="Grader" Type="Self.Grader" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Participants">
+        <PropertyRef Name="ParticipantID" />
+      </Principal>
+      <Dependent Role="Grader">
+        <PropertyRef Name="ParticipantID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Batch_FacultyMapping">
+    <End Role="Batch" Type="Self.Batch" Multiplicity="*" />
+    <End Role="Faculty" Type="Self.Faculty" Multiplicity="*" />
+  </Association>
+  <Association Name="Batch_ModelMapping">
+    <End Role="Batch" Type="Self.Batch" Multiplicity="*" />
+    <End Role="Model" Type="Self.Model" Multiplicity="*" />
+  </Association>
+  <Association Name="Course_BatchMapping">
+    <End Role="Batch" Type="Self.Batch" Multiplicity="*" />
+    <End Role="Courses" Type="Self.Cours" Multiplicity="*" />
+  </Association>
+  <Association Name="Course_FacultyMapping">
+    <End Role="Courses" Type="Self.Cours" Multiplicity="*" />
+    <End Role="Faculty" Type="Self.Faculty" Multiplicity="*" />
+  </Association>
+  <Association Name="Course_ModelMapping">
+    <End Role="Courses" Type="Self.Cours" Multiplicity="*" />
+    <End Role="Model" Type="Self.Model" Multiplicity="*" />
+  </Association>
+  <Association Name="Participant_BatchMapping">
+    <End Role="Batch" Type="Self.Batch" Multiplicity="*" />
+    <End Role="Participants" Type="Self.Participant" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="ProjectXDBStr" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Batches" EntityType="Self.Batch" />
+    <EntitySet Name="Courses" EntityType="Self.Cours" />
+    <EntitySet Name="Faculties" EntityType="Self.Faculty" />
+    <EntitySet Name="Models" EntityType="Self.Model" />
+    <EntitySet Name="Participants" EntityType="Self.Participant" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Graders" EntityType="Self.Grader" />
+    <AssociationSet Name="FK__Grader__BatchID__681373AD" Association="Self.FK__Grader__BatchID__681373AD">
+      <End Role="Batch" EntitySet="Batches" />
+      <End Role="Grader" EntitySet="Graders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Grader__CourseID__690797E6" Association="Self.FK__Grader__CourseID__690797E6">
+      <End Role="Courses" EntitySet="Courses" />
+      <End Role="Grader" EntitySet="Graders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Grader__Particip__69FBBC1F" Association="Self.FK__Grader__Particip__69FBBC1F">
+      <End Role="Participants" EntitySet="Participants" />
+      <End Role="Grader" EntitySet="Graders" />
+    </AssociationSet>
+    <AssociationSet Name="Batch_FacultyMapping" Association="Self.Batch_FacultyMapping">
+      <End Role="Batch" EntitySet="Batches" />
+      <End Role="Faculty" EntitySet="Faculties" />
+    </AssociationSet>
+    <AssociationSet Name="Batch_ModelMapping" Association="Self.Batch_ModelMapping">
+      <End Role="Batch" EntitySet="Batches" />
+      <End Role="Model" EntitySet="Models" />
+    </AssociationSet>
+    <AssociationSet Name="Course_BatchMapping" Association="Self.Course_BatchMapping">
+      <End Role="Batch" EntitySet="Batches" />
+      <End Role="Courses" EntitySet="Courses" />
+    </AssociationSet>
+    <AssociationSet Name="Course_FacultyMapping" Association="Self.Course_FacultyMapping">
+      <End Role="Courses" EntitySet="Courses" />
+      <End Role="Faculty" EntitySet="Faculties" />
+    </AssociationSet>
+    <AssociationSet Name="Course_ModelMapping" Association="Self.Course_ModelMapping">
+      <End Role="Courses" EntitySet="Courses" />
+      <End Role="Model" EntitySet="Models" />
+    </AssociationSet>
+    <AssociationSet Name="Participant_BatchMapping" Association="Self.Participant_BatchMapping">
+      <End Role="Batch" EntitySet="Batches" />
+      <End Role="Participants" EntitySet="Participants" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="uspInsertBatch">
+      <Parameter Name="BatchID" Mode="In" Type="String" />
+      <Parameter Name="BatchName" Mode="In" Type="String" />
+      <Parameter Name="BatchStrength" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspInsertBatchFacultyMapping">
+      <Parameter Name="BatchID" Mode="In" Type="String" />
+      <Parameter Name="PSNo" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspInsertBatchModelMapping">
+      <Parameter Name="BatchID" Mode="In" Type="String" />
+      <Parameter Name="ModelID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspInsertCourse_BatchMapping">
+      <Parameter Name="CourseID" Mode="In" Type="String" />
+      <Parameter Name="BatchID" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="uspInsertCourseDetails">
+      <Parameter Name="CourseId" Mode="In" Type="String" />
+      <Parameter Name="CourseTitle" Mode="In" Type="String" />
+      <Parameter Name="Duration" Mode="In" Type="Int32" />
+      <Parameter Name="Owner" Mode="In" Type="String" />
+      <Parameter Name="AssessmentMode" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="uspInsertFacultyDetails">
+      <Parameter Name="Name" Mode="In" Type="String" />
+      <Parameter Name="email" Mode="In" Type="String" />
+      <Parameter Name="psno" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspInsertGrader">
+      <Parameter Name="Marks_Obtain" Mode="In" Type="Int32" />
+      <Parameter Name="Feedback" Mode="In" Type="String" />
+      <Parameter Name="BatchID" Mode="In" Type="String" />
+      <Parameter Name="CourseID" Mode="In" Type="String" />
+      <Parameter Name="ParticipantID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspInsertModelDetails">
+      <Parameter Name="Mid" Mode="In" Type="Int32" />
+      <Parameter Name="Mname" Mode="In" Type="String" />
+      <Parameter Name="Mowner" Mode="In" Type="String" />
+      <Parameter Name="Mdate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="uspInsertParticipants">
+      <Parameter Name="ParticipantID" Mode="In" Type="Int32" />
+      <Parameter Name="ParticipantName" Mode="In" Type="String" />
+      <Parameter Name="ParticipantEmailID" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="uspInsertParticitpantBatchMapping">
+      <Parameter Name="BatchID" Mode="In" Type="String" />
+      <Parameter Name="ParticipantID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspModifyAssessmentMode">
+      <Parameter Name="CID" Mode="In" Type="String" />
+      <Parameter Name="Mode" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="uspModifyCourseDuration">
+      <Parameter Name="CID" Mode="In" Type="String" />
+      <Parameter Name="Dur" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspModifyCourseOwner">
+      <Parameter Name="CID" Mode="In" Type="String" />
+      <Parameter Name="Own" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="uspModifyGrader">
+      <Parameter Name="Marks_Obtained" Mode="In" Type="Int32" />
+      <Parameter Name="Feedback" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="uspSelecBatch" ReturnType="Collection(String)">
+      <Parameter Name="batchId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="uspSelectBatch" ReturnType="Collection(String)">
+      <Parameter Name="batchId" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+</Schema>

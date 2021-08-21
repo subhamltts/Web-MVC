@@ -1,0 +1,46 @@
+﻿@model IEnumerable<ProjectXWebApp.Models.CourseModel>
+
+@{
+    ViewBag.Title = "Get Courses";
+    Layout = "~/Views/Shared/_ProjectXLayout.cshtml";
+}
+
+<h2>List of Courses</h2>
+
+<p>
+    @Html.ActionLink("Add New Course", "AddNewCourse")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CourseTitle)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Owner)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AssessmentMode)
+        </th>*@
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CourseTitle)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Owner)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AssessmentMode)
+        </td>*@
+        <td>
+            @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+        </td>
+    </tr>
+}
+
+</table>
